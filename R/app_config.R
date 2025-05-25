@@ -42,3 +42,30 @@ get_golem_config <- function(
     use_parent = use_parent
   )
 }
+
+
+# ----------------------------------------------------------------------------
+# Global app configuration: data pickers and theme
+# ----------------------------------------------------------------------------
+
+#' Precomputed team picker choices
+#'
+#' A data.frame of team abbreviations, names, conference, and division for the NFL.
+#' Used to populate select inputs in the UI.
+#'
+#' @source nflreadr::load_teams(current = TRUE)
+#' @noRd
+teams_picker_choices <- nflreadr::load_teams(current = TRUE) |>
+  dplyr::select(team_abbr, team_name, team_conf, team_division) |>
+  dplyr::arrange(team_division, team_name) |>
+  as.data.frame()
+
+#' Dashboard theme for bs4Dash
+#'
+#' A fresh theme object defining colors and styling for the dashboard.
+#' @noRd
+my_theme <- fresh::create_theme(
+  theme = "paper",
+  fresh::bs4dash_sidebar_dark(bg = "#2d3b4d"),
+  fresh::bs4dash_status(primary = "purple", info = "#2eec900")
+)

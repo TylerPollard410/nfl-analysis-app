@@ -15,6 +15,22 @@
 
 ## Dependencies ----
 ## Amend DESCRIPTION with dependencies read from package code parsing
+usethis::use_package("bs4Dash")
+usethis::use_package("fresh")
+usethis::use_dev_package("nflverse")
+# usethis::use_dev_package("nflreadr")
+# usethis::use_dev_package("nflfastR")
+# usethis::use_dev_package("nflseedR")
+# usethis::use_dev_package("nflplotR")
+usethis::use_package("reactable")
+usethis::use_package("shiny")
+usethis::use_package("shinycssloaders")
+usethis::use_package("shinyjs")
+usethis::use_package("shinyWidgets")
+usethis::use_package("dplyr")
+usethis::use_package("tidyverse", type = "Depends")
+usethis::use_package("waiter")
+
 ## install.packages('attachment') # if needed.
 attachment::att_amend_desc()
 
@@ -36,9 +52,11 @@ golem::add_css_file("custom")
 golem::add_sass_file("custom")
 golem::add_any_file("file.json")
 
+
 ## Add internal datasets ----
 ## If you have data in your package
-usethis::use_data_raw(name = "my_dataset", open = FALSE)
+#usethis::use_data_raw(name = "my_dataset", open = FALSE)
+usethis::use_data_raw()
 
 ## Tests ----
 ## Add one line by test you want to create
