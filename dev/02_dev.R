@@ -64,7 +64,7 @@ covrpage::covrpage()
 ## (You'll need GitHub there)
 usethis::use_github()
 
-# GitHub Actions
+# GitHub Actionsssh -T git@github.com
 usethis::use_github_action()
 # Chose one of the three
 # See https://usethis.r-lib.org/reference/use_github_action.html
