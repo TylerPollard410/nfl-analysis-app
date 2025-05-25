@@ -28,7 +28,7 @@ golem::fill_desc(
     email = "tylerpollard410@gmail.com", # Your email
     role = c("aut", "cre") # Your role (here author/creator)
   ),
-  repo_url = "https://github.com/tylerpollard410/nfl-analysis-app.git", # The URL of the GitHub repo (optional),
+  repo_url = "https://github.com/TylerPollard410/nfl-analysis-app.git", # The URL of the GitHub repo (optional),
   pkg_version = "0.1.0", # The version of the package containing the app
   set_options = TRUE # Set the global golem options
 )
@@ -65,7 +65,7 @@ usethis::use_git()
 ## Sets the remote associated with 'name' to 'url'
 usethis::use_git_remote(
   name = "origin",
-  url = "https://github.com/tylerpollard410/nfl-analysis-app.git"
+  url = "https://github.com/TylerPollard410/nfl-analysis-app.git"
 )
 
 # You're now set! ----
