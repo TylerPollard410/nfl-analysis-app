@@ -8,28 +8,27 @@ Description: Interactive Shiny dashboard for NFL team rankings, historical
 License: MIT + file LICENSE
 URL: https://github.com/TylerPollard410/nfl-analysis-app.git
 BugReports: https://github.com/TylerPollard410/nfl-analysis-app.git/issues
+Config/testthat/edition: 3
+Encoding: UTF-8
+Language: en-US
+LazyData: true
+RoxygenNote: 7.3.2
 Imports: 
     bs4Dash,
-    config,
     dplyr,
     fresh,
-    golem,
-    nflverse (>= 1.0.3.9000),
+    nflfastR (>= 5.1.0.9000),
+    nflplotR (>= 1.4.0.9003),
+    nflreadr (>= 1.4.1.7),
+    nflseedR (>= 2.0.0.9000),
     reactable,
     shiny,
     shinycssloaders,
     shinyjs,
     shinyWidgets,
     waiter
-Suggests: 
-    spelling,
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
-Encoding: UTF-8
-Language: en-US
-LazyData: true
-RoxygenNote: 7.3.2
 Remotes: 
-    nflverse/nflverse
-Depends: 
-    tidyverse
+    nflverse/nflreadr,
+    nflverse/nflfastR,
+    nflverse/nflseedR,
+    nflverse/nflplotR

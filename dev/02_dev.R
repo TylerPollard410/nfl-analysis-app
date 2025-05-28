@@ -15,20 +15,20 @@
 
 ## Dependencies ----
 ## Amend DESCRIPTION with dependencies read from package code parsing
-usethis::use_package("bs4Dash")
+usethis::use_package("bs4Dash", type = "Imports")
 usethis::use_package("fresh")
-usethis::use_dev_package("nflverse")
-# usethis::use_dev_package("nflreadr")
-# usethis::use_dev_package("nflfastR")
-# usethis::use_dev_package("nflseedR")
-# usethis::use_dev_package("nflplotR")
+#usethis::use_dev_package("nflverse")
+usethis::use_dev_package("nflreadr", remote = "nflverse/nflreadr")
+usethis::use_dev_package("nflfastR", remote = "nflverse/nflfastR")
+usethis::use_dev_package("nflseedR", remote = "nflverse/nflseedR")
+usethis::use_dev_package("nflplotR", remote = "nflverse/nflplotR")
 usethis::use_package("reactable")
 usethis::use_package("shiny")
 usethis::use_package("shinycssloaders")
 usethis::use_package("shinyjs")
 usethis::use_package("shinyWidgets")
 usethis::use_package("dplyr")
-usethis::use_package("tidyverse", type = "Depends")
+#usethis::use_package("tidyverse", type = "Depends")
 usethis::use_package("waiter")
 
 ## install.packages('attachment') # if needed.
