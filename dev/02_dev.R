@@ -27,7 +27,9 @@ usethis::use_package("shiny")
 usethis::use_package("shinycssloaders")
 usethis::use_package("shinyjs")
 usethis::use_package("shinyWidgets")
+# tidyverse package
 usethis::use_package("dplyr")
+usethis::use_package("stringr")
 #usethis::use_package("tidyverse", type = "Depends")
 usethis::use_package("waiter")
 

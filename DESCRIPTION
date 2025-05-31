@@ -26,6 +26,7 @@ Imports:
     shinycssloaders,
     shinyjs,
     shinyWidgets,
+    stringr,
     waiter
 Remotes: 
     nflverse/nflreadr,
