@@ -43,7 +43,7 @@ golem::add_module(name = "name_of_module2", with_test = TRUE) # Name of the modu
 
 ## Add helper functions ----
 ## Creates fct_* and utils_*
-golem::add_fct("load_data", with_test = FALSE)
+golem::add_fct("load_season_standings_data", with_test = TRUE)
 golem::add_utils("data_url", with_test = FALSE)
 golem::ad
 
@@ -63,7 +63,7 @@ usethis::use_data_raw()
 
 ## Tests ----
 ## Add one line by test you want to create
-usethis::use_test("fct_load_data")
+usethis::use_test("fct_get_season_data")
 
 # Documentation
 

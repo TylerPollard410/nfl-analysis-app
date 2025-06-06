@@ -17,3 +17,8 @@ devtools::test()
 
 # Run the application
 run_app()
+
+
+srs_data <- load_srs_data(2024)
+season_standings_data <- load_season_standings_data(2024)
+season_standings_data2 <- load_season_standings_data(2023:2025)
