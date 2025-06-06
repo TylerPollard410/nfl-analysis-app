@@ -1,7 +1,7 @@
 #' Compute processed game schedule data with betting probabilities and related features
 #'
 #' @description
-#' `compute_game_data()` loads raw NFL game schedules via `nflreadr::load_schedules()`, filters to the requested seasons,
+#' `load_game_data()` loads raw NFL game schedules via `nflreadr::load_schedules()`, filters to the requested seasons,
 #' cleans team abbreviations, and computes a variety of betting-related probabilities and cover flags. It also determines
 #' the game winner and classifies the time-of-day (Day, Evening, Night) based on the game time.
 #'
@@ -20,7 +20,7 @@
 #'
 #' @export
 #' @noRd
-compute_game_data <- function(seasons = 2006:most_recent_season()) {
+load_game_data <- function(seasons = 2006:most_recent_season()) {
   games <- nflreadr::load_schedules(seasons = TRUE)      # load schedule for specified seasons
   games |>
     dplyr::filter(season >= min(seasons)) |>       # ensure only seasons at or after the minimum

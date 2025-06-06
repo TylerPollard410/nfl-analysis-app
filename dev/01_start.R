@@ -57,8 +57,8 @@ golem::use_favicon(path = "inst/app/www/hex-nflanalysisapp.png") # path = "path/
 # golem::remove_favicon() # Uncomment to remove the default favicon
 
 ## Add helper functions ----
-golem::use_utils_ui(with_test = TRUE)
-golem::use_utils_server(with_test = TRUE)
+golem::use_utils_ui(with_test = FALSE)
+golem::use_utils_server(with_test = FALSE)
 
 ## Use git ----
 usethis::use_git()

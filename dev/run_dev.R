@@ -11,6 +11,7 @@ golem::detach_all_attached()
 # Document and reload your package
 golem::document_and_reload()
 
+devtools::test_file("tests/testthat/test-load_data.R")
 testthat::test_dir()
 devtools::test()
 

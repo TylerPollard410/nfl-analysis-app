@@ -14,6 +14,7 @@ run_app <- function(
   uiPattern = "/",
   ...
 ) {
+  source(system.file("start_up_data.R", package = "nflanalysisapp"))
   with_golem_options(
     app = shinyApp(
       ui = app_ui,
