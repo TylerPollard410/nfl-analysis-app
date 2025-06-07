@@ -1,10 +1,10 @@
 # mod_standings.R
-# library(shiny)
-# library(bs4Dash)  # Changed from shinydashboard to bs4Dash
-# library(reactable)
-# library(dplyr)
-# library(shinyWidgets)
-# library(shinycssloaders)
+library(shiny)
+library(bs4Dash)  # Changed from shinydashboard to bs4Dash
+library(reactable)
+library(dplyr)
+library(shinyWidgets)
+library(shinycssloaders)
 
 # ---- Child module: Standings Table ----
 standingsTableOutput <- function(id) {
