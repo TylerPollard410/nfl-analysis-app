@@ -18,10 +18,10 @@
 usethis::use_package("bs4Dash", type = "Imports")
 usethis::use_package("fresh")
 #usethis::use_dev_package("nflverse")
-usethis::use_dev_package("nflreadr", remote = "nflverse/nflreadr")
 usethis::use_dev_package("nflfastR", remote = "nflverse/nflfastR")
 usethis::use_dev_package("nflseedR", remote = "nflverse/nflseedR")
 usethis::use_dev_package("nflplotR", remote = "nflverse/nflplotR")
+usethis::use_dev_package("nflreadr", remote = "nflverse/nflreadr")
 usethis::use_package("reactable")
 usethis::use_package("shiny")
 usethis::use_package("shinycssloaders")
@@ -39,6 +39,7 @@ attachment::att_amend_desc()
 ## Add modules ----
 ## Create a module infrastructure in R/
 golem::add_module(name = "standings", with_test = TRUE) # Name of the module
+golem::add_module(name = "team_rankings", with_test = TRUE) # Name of the module
 golem::add_module(name = "name_of_module2", with_test = TRUE) # Name of the module
 
 ## Add helper functions ----

@@ -1,10 +1,13 @@
 library(shiny)
 library(shinycssloaders)
 library(reactable)
+library(reactablefmtr)
 library(bs4Dash)
+library(dplyr)
 # Source your mod_standings.R (edit path if needed)
-#source("R/mod_standings.R")   # or devtools::load_all() if using as a package
+source("R/mod_standings.R")   # or devtools::load_all() if using as a package
 devtools::load_all()
+
 
 ui <- bs4DashPage(
   dark = NULL,

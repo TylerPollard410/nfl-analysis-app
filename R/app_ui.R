@@ -2,10 +2,11 @@
 #'
 #' @param request Internal parameter for `{shiny}`.
 #'     DO NOT REMOVE.
-#' @import bs4Dash
+#' @import bs4Dash dplyr reactable
 #' @importFrom shinyWidgets virtualSelectInput radioGroupButtons prettyCheckboxGroup noUiSliderInput wNumbFormat
 #'  prepare_choices
-#' @importFrom dplyr select arrange
+#' @importFrom shinycssloaders withSpinner
+#' @importFrom reactablefmtr group_border_sort group_merge_sort embed_img fivethirtyeight color_scales
 #' @importFrom nflreadr load_teams get_current_season get_current_week
 #' @noRd
 
@@ -31,7 +32,7 @@ app_ui <- function(request) {
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # Your application UI logic
-    dashboardPage(dark = NULL,
+    dashboardPage(dark = TRUE,
                   footer = dashboardFooter(left = br()),
                   freshTheme = fresh::create_theme(
                     theme = "paper",
@@ -92,7 +93,7 @@ app_ui <- function(request) {
                     navbarMenu(
                       id = "nav_menu",
                       ### Home Tab ----
-                      navbarTab(tabName = "homeTab", text = "Home")
+                      navbarTab(tabName = "home_tab", text = "Home")
                     ) # end navbarMenu
                   ), # close header
                   scrollToTop = TRUE,
@@ -156,7 +157,7 @@ app_ui <- function(request) {
                     tabItems(
                       # Home Tab  ###############################################
                       tabItem(
-                        tabName = "homeTab",
+                        tabName = "home_tab",
 
                         # Welcome Jumbotron ----
                         bs4Jumbotron(
@@ -193,57 +194,58 @@ app_ui <- function(request) {
                       ## Standings Tab ##########################################
                       tabItem(
                         tabName = "standings_tab",
+                        mod_standings_ui("standings")
                         #fluidPage(
-                        fluidRow(
-                          ##### Inputs ----
-                          ###### Season ----
-                          #column(width = 1,
-                          div(style = "margin-right: 1rem",
-                              virtualSelectInput(
-                                inputId = "standings_Season",
-                                label = "Select season",
-                                choices = seq(2007, get_current_season()),
-                                selected = get_current_season()
-                              )
-                          ),
-                          ###### Table Stat ----
-                          #column(width = 2,
-                          div(style = "margin-right: 1rem",
-                              radioGroupButtons(
-                                inputId = "standings_stat",
-                                label = "Table Statistic",
-                                choices = c("Total", "Game"),
-                                status = "info"
-                              )
-                          ) # end column
-                        ), # end fluidRow
-                        br(),
-                        ##### Season Table ----
-                        fluidRow(
-                          style = "margin-left: -7.5px; margin-right: -7.5px",
-                          column(
-                            width = 6,
-                            style = "padding: 0px"
-                            #standings_tableOutput("standings_tableAFC")
-                          ), # end AFC column
-                          column(
-                            width = 6,
-                            style = "padding: 0px"
-                            #standings_tableOutput("standings_tableNFC")
-                          ) # end NFC column
-                        ), # end divsion standings row
-                        br(),
-                        ##### Playoffs Table ----
-                        fluidRow(
-                          column(
-                            width = 6
-                            #standingsPlayoffsTableOutput("standingsPlayoffsTableAFC")
-                          ), # end AFC column
-                          column(
-                            width = 6
-                            #standingsPlayoffsTableOutput("standingsPlayoffsTableNFC")
-                          ) # end NFC column
-                        ) # end playoff standings row
+                        # fluidRow(
+                        #   ##### Inputs ----
+                        #   ###### Season ----
+                        #   #column(width = 1,
+                        #   div(style = "margin-right: 1rem",
+                        #       virtualSelectInput(
+                        #         inputId = "standings_Season",
+                        #         label = "Select season",
+                        #         choices = seq(2007, get_current_season()),
+                        #         selected = get_current_season()
+                        #       )
+                        #   ),
+                        #   ###### Table Stat ----
+                        #   #column(width = 2,
+                        #   div(style = "margin-right: 1rem",
+                        #       radioGroupButtons(
+                        #         inputId = "standings_stat",
+                        #         label = "Table Statistic",
+                        #         choices = c("Total", "Game"),
+                        #         status = "info"
+                        #       )
+                        #   ) # end column
+                        # ), # end fluidRow
+                        # br(),
+                        # ##### Season Table ----
+                        # fluidRow(
+                        #   style = "margin-left: -7.5px; margin-right: -7.5px",
+                        #   column(
+                        #     width = 6,
+                        #     style = "padding: 0px"
+                        #     #standings_tableOutput("standings_tableAFC")
+                        #   ), # end AFC column
+                        #   column(
+                        #     width = 6,
+                        #     style = "padding: 0px"
+                        #     #standings_tableOutput("standings_tableNFC")
+                        #   ) # end NFC column
+                        # ), # end divsion standings row
+                        # br(),
+                        # ##### Playoffs Table ----
+                        # fluidRow(
+                        #   column(
+                        #     width = 6
+                        #     #standingsPlayoffsTableOutput("standingsPlayoffsTableAFC")
+                        #   ), # end AFC column
+                        #   column(
+                        #     width = 6
+                        #     #standingsPlayoffsTableOutput("standingsPlayoffsTableNFC")
+                        #   ) # end NFC column
+                        # ) # end playoff standings row
                         #) # end fluidPage
                       ), # end Standings tabItem
                       ## Team Tab ###############################################
