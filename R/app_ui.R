@@ -9,22 +9,22 @@
 #' @importFrom nflreadr load_teams get_current_season get_current_week
 #' @noRd
 
-# Team Picker Options
-teams_picker_choices <- load_teams(current = TRUE) |>
-  select(team_abbr, team_name, team_conf, team_division) |>
-  arrange(team_division, team_name) |>
-  as.data.frame()
+# # Team Picker Options
+# teams_picker_choices <- load_teams(current = TRUE) |>
+#   select(team_abbr, team_name, team_conf, team_division) |>
+#   arrange(team_division, team_name) |>
+#   as.data.frame()
 
 # Set Theme
-my_theme <- fresh::create_theme(
-  theme = "paper",
-  fresh::bs4dash_sidebar_dark(
-    bg = "#2d3b4d"
-  ),
-  fresh::bs4dash_status(
-    primary = "purple", info = "#eec900"
-  )
-)
+# my_theme <- fresh::create_theme(
+#   theme = "paper",
+#   fresh::bs4dash_sidebar_dark(
+#     bg = "#2d3b4d"
+#   ),
+#   fresh::bs4dash_status(
+#     primary = "purple", info = "#eec900"
+#   )
+# )
 
 app_ui <- function(request) {
   tagList(
@@ -33,7 +33,16 @@ app_ui <- function(request) {
     # Your application UI logic
     dashboardPage(dark = NULL,
                   footer = dashboardFooter(left = br()),
-                  freshTheme = my_theme,
+                  freshTheme = fresh::create_theme(
+                    theme = "paper",
+                    fresh::bs4dash_sidebar_dark(
+                      bg = "#2d3b4d"
+                    ),
+                    fresh::bs4dash_status(
+                      primary = "purple", info = "#eec900"
+                    )
+                  ),
+                  #freshTheme = my_theme,
                   #preloader = list(html = tagList(spin_1(), "Loading ..."), color = "#3c8dbc"),
 
                   # Dahsboard Header ===============
@@ -81,7 +90,7 @@ app_ui <- function(request) {
                     ),
                     ## Navbar Menu ------------------
                     navbarMenu(
-                      id = "navMenu",
+                      id = "nav_menu",
                       ### Home Tab ----
                       navbarTab(tabName = "homeTab", text = "Home")
                     ) # end navbarMenu
@@ -103,25 +112,25 @@ app_ui <- function(request) {
                       id = "menu_items",
                       ### Data Tab ----
                       h4("Data", style = "color: white"),
-                      menuItem(text = "Standings", tabName = "standingsTab", icon = icon("list-ol")),
+                      menuItem(text = "Standings", tabName = "standings_tab", icon = icon("list-ol")),
                       #menuItem(text = "Scores", tabName = "scoresTab", icon = icon("football-ball")),
-                      menuItem(text = "Team Statistics", icon = icon("users"), expandedName = "teamStatistics",
-                               menuSubItem(text = "Rankings", tabName = "teamRankingsTab"),
-                               menuSubItem(text = "Scoring", tabName = "teamScoringTab"),
-                               menuSubItem(text = "Efficiency", tabName = "teamEfficiencyTab")
+                      menuItem(text = "Team Statistics", icon = icon("users"), expandedName = "team_statistics",
+                               menuSubItem(text = "Rankings", tabName = "team_rankings_tab"),
+                               menuSubItem(text = "Scoring", tabName = "team_scoring_tab"),
+                               menuSubItem(text = "Efficiency", tabName = "team_efficiency_tab")
                       ),
-                      menuItem(text = "Player Statistics", icon = icon("user"), expandedName = "playerStatistics",
-                               menuSubItem(text = "Offense", tabName = "playerOffenseTab"),
-                               menuSubItem(text = "Defense", tabName = "playerDefenseTab"),
-                               menuSubItem(text = "Special Teams", tabName = "playerSpecialTeamsTab"),
-                               menuSubItem(text = "Scoring", tabName = "playerScoringTab"),
-                               menuSubItem(text = "Fantasy", tabName = "playerFantasyTab")
+                      menuItem(text = "Player Statistics", icon = icon("user"), expandedName = "player_statistics",
+                               menuSubItem(text = "Offense", tabName = "player_offense_tab"),
+                               menuSubItem(text = "Defense", tabName = "player_defense_tab"),
+                               menuSubItem(text = "Special Teams", tabName = "player_special_tab"),
+                               menuSubItem(text = "Scoring", tabName = "player_scoring_tab"),
+                               menuSubItem(text = "Fantasy", tabName = "player_fantasy_tab")
                       ),
                       ### Betting Tab ----
                       h4("Betting", style = "color: white"),
-                      menuItem(text = "Games", tabName = "bettingGamesTab", icon = icon("dollar-sign")),
-                      menuItem(text = "Player Props", tabName = "bettingPlayerPropsTab", icon = icon("user-clock")),
-                      menuItem(text = "Plot", tabName = "bettingPlotTab", icon = icon("chart-line"))
+                      menuItem(text = "Games", tabName = "betting_games_tab", icon = icon("dollar-sign")),
+                      menuItem(text = "Player Props", tabName = "betting_player_props_tab", icon = icon("user-clock")),
+                      menuItem(text = "Plot", tabName = "betting_plot_tab", icon = icon("chart-line"))
                     ) # close sidebar menu
                   ), # close dashboard sidebar
                   # Dashboard Controlbar ==================
@@ -141,7 +150,7 @@ app_ui <- function(request) {
                     ## Custon CSS ----
                     # tags$head(
                     #   tags$style(HTML("
-                    #   #teamRankingsTabBox_box .card-body { padding: 0px; }
+                    #   #team_rankings_tabBox_box .card-body { padding: 0px; }
                     # "))
                     # ),
                     tabItems(
@@ -183,7 +192,7 @@ app_ui <- function(request) {
                       # Data Tab ################################################
                       ## Standings Tab ##########################################
                       tabItem(
-                        tabName = "standingsTab",
+                        tabName = "standings_tab",
                         #fluidPage(
                         fluidRow(
                           ##### Inputs ----
@@ -191,7 +200,7 @@ app_ui <- function(request) {
                           #column(width = 1,
                           div(style = "margin-right: 1rem",
                               virtualSelectInput(
-                                inputId = "standingsSeason",
+                                inputId = "standings_Season",
                                 label = "Select season",
                                 choices = seq(2007, get_current_season()),
                                 selected = get_current_season()
@@ -201,7 +210,7 @@ app_ui <- function(request) {
                           #column(width = 2,
                           div(style = "margin-right: 1rem",
                               radioGroupButtons(
-                                inputId = "standingsStat",
+                                inputId = "standings_stat",
                                 label = "Table Statistic",
                                 choices = c("Total", "Game"),
                                 status = "info"
@@ -215,12 +224,12 @@ app_ui <- function(request) {
                           column(
                             width = 6,
                             style = "padding: 0px"
-                            #standingsTableOutput("standingsTableAFC")
+                            #standings_tableOutput("standings_tableAFC")
                           ), # end AFC column
                           column(
                             width = 6,
                             style = "padding: 0px"
-                            #standingsTableOutput("standingsTableNFC")
+                            #standings_tableOutput("standings_tableNFC")
                           ) # end NFC column
                         ), # end divsion standings row
                         br(),
@@ -240,13 +249,13 @@ app_ui <- function(request) {
                       ## Team Tab ###############################################
                       ### Team Rankings ==========================================
                       tabItem(
-                        tabName = "teamRankingsTab",
+                        tabName = "team_rankings_tab",
                         h2("Team Rankings"),
                         #### Inputs ----
                         fluidRow(
                           #column(width = 1,
                           virtualSelectInput(
-                            inputId = "teamRankingsSeason",
+                            inputId = "team_rankings_season",
                             #width = "100%",
                             label = "Select season",
                             choices = seq(2007, get_current_season()),
@@ -263,29 +272,29 @@ app_ui <- function(request) {
                           #   ".col-sm-12 {padding: 0px;}"
                           # ),
                           tabBox(
-                            id = "teamRankingsTabBox",
+                            id = "team_rankings_tabBox",
                             type = "pills",
                             width = 12,
                             #### Overview ----
                             tabPanel(
                               title = "Overview",
-                              value = "teamRankingsOverview"
+                              value = "team_rankings_overview"
                               #teamRankingsOverviewUI("team_rank_overview")
                             ),
                             #### EPA ----
                             tabPanel(
                               title = "EPA",
-                              value = "teamRankingsEpa"
+                              value = "team_rankings_epa"
                             ),
                             #### ELO ----
                             tabPanel(
                               title = "Elo",
-                              value = "teamRankingsElo"
+                              value = "team_rankings_elo"
                             ),
                             #### SRS ----
                             tabPanel(
                               title = "SRS",
-                              value = "teamRankingsSrs"
+                              value = "team_rankings_srs"
                             )
                           ) # end Team Rankings Tab box
                         )
@@ -295,7 +304,7 @@ app_ui <- function(request) {
                       ## Player Tab  ############################################
                       ### Player Offense ========================================
                       tabItem(
-                        tabName = "playerOffenseTab",
+                        tabName = "player_offense_tab",
                         h2("Offensive Player Data"),
                         tags$style(HTML(".vscomp-dropbox-container  {z-index:99999 !important;}")),
 
@@ -304,7 +313,7 @@ app_ui <- function(request) {
                           ##### Season ----
                           column(width = 3,
                                  noUiSliderInput(
-                                   inputId = "playerOffenseSeason",
+                                   inputId = "player_offense_season",
                                    label = "Select seasons",
                                    min = 2006,
                                    max = get_current_season(),
@@ -327,7 +336,7 @@ app_ui <- function(request) {
                           ##### Game Type ----
                           column(width = 2,
                                  prettyCheckboxGroup(
-                                   inputId = "playerOffenseGameType",
+                                   inputId = "player_offense_gameType",
                                    label = "Game Type",
                                    choices = c("Regular Season" = "REG",
                                                "Playoffs" = "POST"),
@@ -340,7 +349,7 @@ app_ui <- function(request) {
                           ##### Team ----
                           column(width = 3,
                                  virtualSelectInput(
-                                   inputId = "playerOffenseTeam",
+                                   inputId = "player_offense_team",
                                    label = "Select team to analyze",
                                    choices = prepare_choices(
                                      .data = teams_picker_choices,
@@ -356,7 +365,7 @@ app_ui <- function(request) {
                           ##### Table Stat ----
                           column(width = 2,
                                  radioGroupButtons(
-                                   inputId = "playerOffenseStat",
+                                   inputId = "player_offense_stat",
                                    label = "Table Statistic",
                                    choices = c("Total", "Game"),
                                    status = "info"
@@ -398,10 +407,10 @@ app_ui <- function(request) {
                       # Betting Tab  ############################################
                       ## Games Tab ==============================================
                       tabItem(
-                        tabName = "bettingGamesTab",
+                        tabName = "betting_games_tab",
 
                         tabsetPanel(
-                          id = "bettingGamesTabset",
+                          id = "betting_games_tabset",
                           ### Lines ----
                           tabPanel(
                             title = "Lines",
@@ -410,7 +419,7 @@ app_ui <- function(request) {
                             fluidRow(
                               column(1,
                                      selectInput(
-                                       inputId = "bettingSeason",
+                                       inputId = "betting_season",
                                        label = "Season",
                                        choices = 2007:get_current_season(),
                                        selected = get_current_season()
@@ -418,7 +427,7 @@ app_ui <- function(request) {
                               ),
                               column(1,
                                      selectInput(
-                                       inputId = "bettingWeek",
+                                       inputId = "betting_week",
                                        label = "Week",
                                        choices = 1:get_current_week(),
                                        selected = get_current_week()
@@ -448,11 +457,11 @@ app_ui <- function(request) {
                             #bettingGameDetailUI("gameDetail") # end fluidRow
                           ) # end Prediction tabPanel
                         ) # end tabsetPanel
-                      ), #end bettingGamesTab
+                      ), #end betting_games_tab
 
                       ## Player Props =========================================
                       tabItem(
-                        tabName = "bettingPlayerPropsTab",
+                        tabName = "betting_player_props_tab",
                         fluidRow(
                           #tableOutput('show_inputs1')
                         )
@@ -460,7 +469,7 @@ app_ui <- function(request) {
 
                       ## Plot =================================================
                       tabItem(
-                        tabName = "bettingPlotTab",
+                        tabName = "betting_plot_tab",
                         h4("Plot Data"),
                         fluidRow(
                           # column(width = 3,

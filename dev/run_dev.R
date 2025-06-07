@@ -11,14 +11,11 @@ golem::detach_all_attached()
 # Document and reload your package
 golem::document_and_reload()
 
-devtools::test_file("tests/testthat/test-load_data.R")
-testthat::test_dir()
 devtools::test()
 
 # Run the application
+golem::detach_all_attached()
+golem::document_and_reload()
 run_app()
 
 
-srs_data <- load_srs_data(2024)
-season_standings_data <- load_season_standings_data(2024)
-season_standings_data2 <- load_season_standings_data(2023:2025)

@@ -1,3 +1,37 @@
-test_that("multiplication works", {
-  expect_equal(2 * 2, 4)
+# tests/testthat/test-fct-load-season-standings-data.R
+
+test_that("load_season_standings_data calls get_season_dataset and returns data.frame", {
+  seasons_input <- c(2018, 2019)
+  fake_df <- data.frame(
+    season    = c(2018, 2019),
+    wins      = c(10, 11),
+    losses    = c(6, 5),
+    stringsAsFactors = FALSE
+  )
+
+  pkg_env <- environment(load_season_standings_data)
+
+  local_mocked_bindings(
+    validate_seasons    = function(seasons) TRUE,
+    get_season_dataset  = function(dataset, seasons) {
+      expect_equal(dataset, "season_standings_data")
+      expect_equal(seasons, seasons_input)
+      fake_df
+    },
+    .env = pkg_env
+  )
+
+  result <- load_season_standings_data(seasons_input)
+  expect_s3_class(result, "data.frame")
+  expect_equal(result, fake_df)
+})
+
+test_that("load_season_standings_data errors on invalid seasons", {
+  pkg_env <- environment(load_season_standings_data)
+
+  local_mocked_bindings(
+    validate_seasons = function(seasons) stop("invalid"),
+    .env             = pkg_env
+  )
+  expect_error(load_season_standings_data("invalid"), "invalid")
 })
