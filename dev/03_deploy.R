@@ -45,12 +45,14 @@ rsconnect::writeManifest()
 ## In command line.
 rsconnect::deployApp(
   appName = desc::desc_get_field("Package"),
-  appTitle = desc::desc_get_field("Package"),
+  appTitle = desc::desc_get_field("Title"),
+  server = "shinyapps.io",
+  account = "tylerpollard410",
   appFiles = c(
     # Add any additional files unique to your app here.
     "R/",
     "inst/",
-    "data/",
+    #"data/",
     "NAMESPACE",
     "DESCRIPTION",
     "app.R"

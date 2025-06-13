@@ -14,11 +14,13 @@ Imports:
     dplyr,
     fresh,
     golem,
-    nflfastR (>= 5.1.0.9000),
-    nflplotR (>= 1.4.0.9003),
-    nflreadr (>= 1.4.1.7),
-    nflseedR (>= 2.0.0.9000),
+    nflfastR,
+    nflplotR,
+    nflreadr,
+    nflseedR,
+    pkgload,
     reactable,
+    reactablefmtr,
     shiny,
     shinycssloaders,
     shinyjs,
@@ -32,7 +34,7 @@ Suggests:
     spelling,
     testthat,
     tibble
-Remotes:  
+Remotes: 
     nflverse/nflreadr,
     nflverse/nflfastR,
     nflverse/nflseedR,
