@@ -18,4 +18,11 @@ golem::detach_all_attached()
 golem::document_and_reload()
 run_app()
 
+options(shiny.launch.browser = TRUE)
+profvis::profvis({ run_app() })
 
+# app.R run
+pkgload::load_all(export_all = FALSE,helpers = FALSE,attach_testthat = FALSE)
+options( "golem.app.prod" = TRUE)
+nflanalysisapp::run_app() # add parameters here (if any)
+profvis::profvis({nflanalysisapp::run_app()})

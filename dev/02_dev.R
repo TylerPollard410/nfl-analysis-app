@@ -16,8 +16,10 @@
 ## Dependencies ----
 ## Amend DESCRIPTION with dependencies read from package code parsing
 usethis::use_package("bs4Dash", type = "Imports")
+usethis::use_package("cachem")
 usethis::use_package("fresh")
 #usethis::use_dev_package("nflverse")
+usethis::use_package("memoise")
 usethis::use_dev_package("nflfastR", remote = "nflverse/nflfastR")
 usethis::use_dev_package("nflseedR", remote = "nflverse/nflseedR")
 usethis::use_dev_package("nflplotR", remote = "nflverse/nflplotR")
