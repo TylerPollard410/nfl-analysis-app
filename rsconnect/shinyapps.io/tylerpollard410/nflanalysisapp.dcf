@@ -5,6 +5,6 @@ account: tylerpollard410
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 14930086
-bundleId:
+bundleId: 10476403
 url: https://tylerpollard410.shinyapps.io/nflanalysisapp/
 version: 1

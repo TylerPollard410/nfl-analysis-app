@@ -43,7 +43,6 @@ attachment::att_amend_desc()
 ## Create a module infrastructure in R/
 golem::add_module(name = "standings", with_test = TRUE) # Name of the module
 golem::add_module(name = "team_rankings", with_test = TRUE) # Name of the module
-golem::add_module(name = "name_of_module2", with_test = TRUE) # Name of the module
 
 ## Add helper functions ----
 ## Creates fct_* and utils_*
@@ -60,7 +59,6 @@ golem::add_fct("load_turnover_data", with_test = TRUE)
 golem::add_fct("load_weekly_standings_data", with_test = TRUE)
 
 golem::add_utils("data_url", with_test = FALSE)
-golem::ad
 
 ## External resources
 ## Creates .js and .css files at inst/app/www
