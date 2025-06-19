@@ -162,7 +162,7 @@ app_ui <- function(request) {
                         # Welcome Jumbotron ----
                         bs4Jumbotron(
                           title = h1("Welcome to the NFL Analysis Dashboard"),
-                          lead = includeMarkdown(app_sys("app/docs/Purpose.Rmd")),
+                          lead = shiny::includeMarkdown(app_sys("app/docs/Purpose.Rmd")),
                           #lead = "This dashboard explores historical and current NFL data using powerful visualizations and modeling tools.",
                           status = "primary",
                           btnName = NULL,
@@ -187,7 +187,7 @@ app_ui <- function(request) {
                             # ),
                             br(),
                             shiny::withMathJax(),
-                            includeMarkdown(app_sys("app/docs/Description.Rmd"))
+                            shiny::includeMarkdown(app_sys("app/docs/Description.Rmd"))
                         ) # end box
                       ), # close Home tab Item
                       # Data Tab ################################################
