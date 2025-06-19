@@ -44,6 +44,7 @@ rsconnect::writeManifest()
 
 ## In command line.
 remotes::install_github("TylerPollard410/nfl-analysis-app")
+remotes::install_local()
 rsconnect::deployApp(
   appName = desc::desc_get_field("Package"),
   appTitle = desc::desc_get_field("Title"),
@@ -60,5 +61,6 @@ rsconnect::deployApp(
   ),
   appId = rsconnect::deployments(".")$appID,
   lint = FALSE,
+  logLevel = "verbose",
   forceUpdate = TRUE
 )

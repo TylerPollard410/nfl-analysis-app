@@ -19,6 +19,7 @@ usethis::use_package("bs4Dash", type = "Imports")
 usethis::use_package("cachem")
 usethis::use_package("fresh")
 #usethis::use_dev_package("nflverse")
+usethis::use_package("markdown")
 usethis::use_package("memoise")
 usethis::use_dev_package("nflfastR", remote = "nflverse/nflfastR")
 usethis::use_dev_package("nflseedR", remote = "nflverse/nflseedR")
@@ -37,7 +38,9 @@ usethis::use_package("stringr")
 usethis::use_package("waiter")
 
 ## install.packages('attachment') # if needed.
-attachment::att_amend_desc()
+attachment::att_amend_desc(
+  extra.suggests =
+)
 
 ## Add modules ----
 ## Create a module infrastructure in R/
